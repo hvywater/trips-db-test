@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 import "./TripList.css";
 
@@ -7,12 +7,17 @@ const TripList = () => {
   const [trips, setTrips] = useState([]);
   const [url, setUrl] = useState("http://localhost:3000/trips");
 
+
+  const fetchTrips = useCallback( async () => {
+    const response = await fetch(url);
+    const json = await response.json();
+    setTrips(json);
+  }, [url]);
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((json) => setTrips(json));
-  }, [url]);
+    fetchTrips();
+  }, [url, fetchTrips]);
 
   return (
     <div className="trip-list">
