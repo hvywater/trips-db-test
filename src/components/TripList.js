@@ -4,7 +4,7 @@ import {useFetch} from "../hooks/useFetch";
 import "./TripList.css";
 
 const TripList = () => {
-  const [url, setUrl] = useState("http://localhost:3000/tripsss");
+  const [url, setUrl] = useState("http://localhost:3000/trips");
   const { data: trips, isPending, error } = useFetch(url);
 
   return (
@@ -20,6 +20,7 @@ const TripList = () => {
               <p>{trip.price}</p>
             </li>
           ))}
+        
       </ul>
       <div className="filters">
         <button
